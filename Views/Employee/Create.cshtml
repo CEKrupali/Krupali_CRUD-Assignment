@@ -1,0 +1,95 @@
+﻿@model Krupali_CRUD_Assignment.Models.Employee
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+@*<script src="/lib/jquery.min.js"></script>
+    <script src="/lib/jquery.plugin.js"></script>*@
+
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" id="mainDiv">
+            <h5><b>Documents</b></h5>
+            <div class="col-md-10" id="divDocument">
+                <input type="file" name="elementName" id="docFile" />
+            </div>
+            <input type="button" name="btnAddDoc" id="btnAdd" value="Add More" class="btnAddMore">
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default Create" />
+            </div>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var count = 1;
+
+        //alert('1');
+        $("#btnAdd").click(function () {
+            //var divCopy = $("#divDocument").html();
+            //$("#mainDiv").append(divCopy);
+
+            //$('#divDocument').append('<input type="file" name="elementName_" ' + count + 'id="docFile" ' + count + ' />');
+            $('#divDocument').append('<input type="file" id="docFile' + count + '" name="elementName_' + count + '"/>');
+            count++;
+
+        });
+    });
+</script>
+<style>
+    
+    /* Blue */
+    .Create {
+        background-color: #008CBA;
+    }
+    /* Blue */
+    .btnAddMore {
+        background-color: #4CAF50;
+    }
+</style>

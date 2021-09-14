@@ -1,0 +1,22 @@
+		 
+Build a simple CRUD App operation in ASP.NET or MVC.NET, Database - SQL Server
+
+Provide SQL server script with Stored procedures or SQL queries used
+Create Table Employee (e.g.EmpId,Name,Email,Designation)
+and Employee Details (e.g.EmpId,FileName,FilePath,CreatedDate)
+
+Add Employees – at least 2
+Edit and Delete the Employees added
+View the Employees
+Add Employee Details - at least 3 documents attachment per employee 
+Employee Documents Submitted(e.g.Emirates ID, Degree certificate, Passport Copy, Resume)
+(any type of attachment pdf/excel/word)
+View added documents and download added documents
+Edit and Delete added documents
+Documents should be saved in encrypted format
+All Pages should be responsive
+
+Hint:   You may choose any standard Design or the design of your choice for creating pages. 
+When you complete the task, Please push your code repository to the github with SQL scripts and send us the repository link by email.
+Also provide us document of your developed screen shots.
+

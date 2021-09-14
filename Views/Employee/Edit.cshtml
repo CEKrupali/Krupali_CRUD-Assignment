@@ -1,0 +1,135 @@
+﻿@model Krupali_CRUD_Assignment.Models.Employee
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm(Html.BeginForm("Edit", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmpId, new { htmlAttributes = new { @class = "form-control" } })
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.EmpId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmpId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmpId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @{int count = 0;}
+        @if (Model.EmployeeDtlList != null && Model.EmployeeDtlList.Count > 0)
+        {
+            <div class="form-group" id="mainDiv">
+                <h5><b>Documents</b></h5>
+                <div class="col-md-10" id="divDocument">
+                    @foreach (var data in Model.EmployeeDtlList)
+                    {
+                        count++;
+                        @*<input type="file" name="elementName_@count" id="docFile_@count" />*@
+                        <a href="@data.FilePath">@data.FileName</a>
+                        <input type="button" class="Delete" value="Delete" id="btnDeleteDoc" onclick="DeleteDoc(@data.EmpDtlId)" />
+                        <br/>
+                        @*<a href="C:\Users\Krupali\Downloads\InterviewTask_2021 (1).txt">@data.FileName</a>*@
+                    }
+                    <input type="file" name="elementName_@count" id="docFile_@count" />
+                </div>
+
+                <input type="hidden" id="hdnCount" value="@count" />
+                <input type="button" name="btnAddDoc" id="btnAdd" value="Add More"  class="btnAddMore">
+            </div>
+
+        }
+        else
+        {
+            <div class="form-group" id="mainDiv">
+                <h5><b>Documents</b></h5>
+                <div class="col-md-10" id="divDocument">
+                    <input type="file" name="elementName" id="docFile" />
+                </div>
+                <input type="button" name="btnAddDoc" id="btnAdd" value="Add More" class="btnAddMore">
+            </div>
+        }
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update" class="Update btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //alert($("#hdnCount").val());
+        var count = $("#hdnCount").val();
+        count = (parseInt(count)) + 1;
+        $("#btnAdd").click(function () {
+            $('#divDocument').append('<input type="file" id="docFile' + count + '" name="elementName_' + count + '"/>');
+            count++;
+        });
+
+    });
+    function DeleteDoc(id) {
+        if (confirm("Do you really want to delete selected job/s?"))
+            window.location.href = "/Employee/DeleteEmployeeDtl?EmpDtlid=" + id;
+        else
+            return false;
+
+        //alert(id);
+    }
+</script>
+<style>
+    /* Blue */
+    .Update {
+        background-color: #008CBA;
+    }
+    /* Green */
+    .btnAddMore {
+        background-color: #4CAF50;
+    }
+
+</style>
